@@ -51,4 +51,29 @@ function registerUser() {
     // Redirect to login page
     window.location.href = '../index.html';
   }
+
+  function authenticateUser(event) {
+    event.preventDefault(); // Prevent the default form submission
+  
+    // Get form values
+    const username = document.getElementById('usernameLogin').value.trim();
+    const password = document.getElementById('passwordLogin').value;
+  
+    // Check if all fields are filled
+    if (!username || !password) {
+      alert('All fields are required!');
+      return;
+    }
+  
+    // Get stored user data from local storage
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+  
+    // Check if user exists and credentials match
+    if (storedUser && storedUser.email === username && storedUser.password === password) {
+      // Redirect to home page
+      window.location.href = './Home/home.html';
+    } else {
+      alert('Invalid username or password!');
+    }
+  }
   
