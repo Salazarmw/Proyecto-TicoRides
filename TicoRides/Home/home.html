@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aventones</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css"
+      rel="stylesheet" />
+    <script
+      src="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Logo section -->
+    <div class="logo-container">
+      <img src="../Resources/Images/logoAventones.png" alt="Aventones Logo" />
+    </div>
+
+    <!-- Header with navigation -->
+    <header>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="../Home/home.html" class="active">Home</a></li>
+          <li><a href="../Rides/myRides.html">Rides</a></li>
+          <li><a href="../Booking/booking.html">Bookings</a></li>
+        </ul>
+        <div class="right-container">
+          <!-- Search bar -->
+          <div class="search-container">
+            <input type="text" placeholder="Search..." />
+          </div>
+          <!-- User menu with dropdown -->
+          <div class="user-menu">
+            <button class="user-icon">
+              <img src="../Resources/Images/userIcon.png" alt="User Menu" />
+            </button>
+            <div class="dropdown-content">
+              <a href="../index.html">Logout</a>
+              <a href="../Home/editProfile.html">Settings</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main content -->
+    <main>
+      <h1>Search rides</h1>
+      <hr />
+      <div class="search-rides-container">
+        <!-- Ride search form -->
+        <div class="ride-search">
+          <div class="from-container">
+            <label for="from">From</label>
+            <select id="from">
+              <option value="Quesada">Quesada</option>
+            </select>
+          </div>
+          <div class="to-container">
+            <label for="to">To</label>
+            <select id="to">
+              <option value="Zarcero">Zarcero</option>
+            </select>
+            <button>Find rides</button>
+          </div>
+        </div>
+
+        <!-- Days selection -->
+        <div class="days-select">
+          <label>Days</label>
+          <label><input type="checkbox" /> Mon</label>
+          <label><input type="checkbox" /> Tue</label>
+          <label><input type="checkbox" /> Wed</label>
+          <label><input type="checkbox" /> Thu</label>
+          <label><input type="checkbox" /> Fri</label>
+          <label><input type="checkbox" /> Sat</label>
+          <label><input type="checkbox" /> Sun</label>
+        </div>
+      </div>
+
+      <!-- Rides found information -->
+      <div class="paragraph-container">
+        <p>
+          Rides found from <span class="bold-span">Quesada</span> to
+          <span class="bold-span">Zarcero</span>
+        </p>
+      </div>
+
+      <!-- Rides table -->
+      <table>
+        <thead>
+          <tr>
+            <th>Driver</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Seats</th>
+            <th>Car</th>
+            <th>Fee</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <img src="../Resources/Images/userIcon.png" alt="Driver" /> baroyo
+            </td>
+            <td><a href="#">Quesada</a></td>
+            <td>Alajuela</td>
+            <td>2</td>
+            <td>Nissan Pathfinder 2015</td>
+            <td>$5</td>
+            <td><a href="../Rides/seeRide.html">Request</a></td>
+          </tr>
+          <tr>
+            <td>
+              <img src="../Resources/Images/userIcon.png" alt="Driver" /> baroyo
+            </td>
+            <td><a href="#">Quesada</a></td>
+            <td>Naranjo</td>
+            <td>1</td>
+            <td>Toyota Corolla 2020</td>
+            <td>$10</td>
+            <td><a href="#">Request</a></td>
+          </tr>
+          <tr>
+            <td>
+              <img src="../Resources/Images/userIcon.png" alt="Driver" /> yluna
+            </td>
+            <td><a href="#">Aguas Zarcas</a></td>
+            <td>Naranjo</td>
+            <td>1</td>
+            <td>Ford Festiva 1990</td>
+            <td>--</td>
+            <td><a href="#">Request</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Map section -->
+      <div id="map"></div>
+      <script src="../Resources/Scripts/map.js"></script>
+    </main>
+
+    <!-- Footer section with navigation -->
+    <footer>
+      <nav>
+        <a href="../Home/home.html">Home |</a>
+        <a href="../Rides/myRides.html">Rides |</a>
+        <a href="../Booking/booking.html">Bookings |</a>
+        <a href="../Home/editProfile.html">Settings |</a>
+        <a href="../index.html">Login |</a>
+        <a href="../Register/register.html">Register</a>
+      </nav>
+      <br />
+      <p>&copy; Aventones.com</p>
+    </footer>
+  </body>
+</html>

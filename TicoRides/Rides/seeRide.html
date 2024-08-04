@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aventones - See Ride</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!-- Logo section -->
+  <div class="logo-container">
+    <img src="../Resources/Images/logoAventones.png" alt="Aventones Logo" />
+  </div>
+
+  <!-- Navigation bar -->
+  <header>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="../Home/home.html">Home</a></li>
+        <li><a href="../Rides/myRides.html" class="active">Rides</a></li>
+        <li><a href="../Booking/booking.html">Bookings</a></li>
+      </ul>
+      <div class="right-container">
+        <div class="search-container">
+          <input type="text" placeholder="Search..." />
+        </div>
+        <div class="user-menu">
+          <button class="user-icon">
+            <img src="../Resources/Images/userIcon.png" alt="User Menu" />
+          </button>
+          <div class="dropdown-content">
+            <a href="../index.html">Logout</a>
+            <a href="../Home/editProfile.html">Settings</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main content: Edit Ride -->
+  <main>
+    <h1>Quesada - Zarcero</h1>
+    <hr />
+    <!-- User profile -->
+    <div class="profile">
+      <img src="../Resources/Images/userIcon.png" alt="User Profile" />
+      <span>barroyo</span>
+    </div>
+
+    <!-- Form to edit ride details -->
+    <form>
+      <div class="route-container">
+        <p>Departure from<span>Quesada</span></p>
+        <p>Arrive To<span>Zarcero</span></p>
+      </div>
+
+      <!-- Ride details -->
+      <div class="ride-data-container">
+        <label>Days</label>
+        <div class="days-select">
+          <label><input type="checkbox" name="days" value="Mon" checked />Mon</label>
+          <label><input type="checkbox" name="days" value="Tue" checked />Tue</label>
+          <label><input type="checkbox" name="days" value="Wed" checked />Wed</label>
+          <label><input type="checkbox" name="days" value="Thu" />Thu</label>
+          <label><input type="checkbox" name="days" value="Fri" />Fri</label>
+          <label><input type="checkbox" name="days" value="Sat" />Sat</label>
+          <label><input type="checkbox" name="days" value="Sun" />Sun</label>
+        </div>
+
+        <!-- Inputs for time, seats, fee -->
+        <div class="input-group">
+          <label for="timeSee">Time</label>
+          <select id="timeSee" name="time">
+            <option value="10:00 am">10:00 am</option>
+          </select>
+
+          <label for="seatsSee">Seats</label>
+          <input type="number" id="seatsSee" value="2" min="1" max="4" step="1" />
+
+          <label for="feeSee">Fee</label>
+          <input type="number" id="feeSee" value="15" min="1" max="30" step="1" />
+        </div>
+      </div>
+
+      <!-- Vehicle details -->
+      <fieldset>
+        <legend>Vehicle Details</legend>
+        <div class="input-group">
+          <div>
+            <label for="make">Make</label>
+            <input type="text" id="make" name="make" value="Nissan" />
+          </div>
+
+          <div>
+            <label for="model">Model</label>
+            <input type="text" id="model" name="model" value="March" />
+          </div>
+
+          <div>
+            <label for="year">Year</label>
+            <input type="number" id="year" value="2020" min="1999" max="2025" step="1" />
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- Buttons: Cancel and Request -->
+      <div class="button-group">
+        <div class="button-container">
+          <a href="../Home/home.html">Cancel</a>
+        </div>
+        <div class="button-container">
+          <button class="save-button" onclick="window.location.href='../Rides/myRides.html'">Request</button>
+        </div>
+      </div>
+    </form>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <nav>
+      <a href="../Home/home.html">Home |</a>
+      <a href="../Rides/myRides.html">Rides |</a>
+      <a href="../Booking/booking.html">Bookings |</a>
+      <a href="../Home/editProfile.html">Settings |</a>
+      <a href="../index.html">Login |</a>
+      <a href="../Register/register.html">Register</a>
+    </nav>
+    <p>&copy; Aventones.com</p>
+  </footer>
+</body>
+</html>
