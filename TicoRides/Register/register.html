@@ -4,24 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User Registration</title>
-    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../Resources/Styles/styles.css" />
+    <link rel="stylesheet" href="../Resources/Styles/responsiveDesing.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap"
-      rel="stylesheet" />
+      rel="stylesheet"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap"
-      rel="stylesheet" />
+      rel="stylesheet"
+    />
   </head>
   <body>
     <!-- Main container for registration content -->
     <div class="registration-container">
-
       <!-- Logo section -->
       <div class="logo-container">
         <div class="logo">
           <img
             src="../Resources/Images/logoAventones.png"
-            alt="Aventones Logo" />
+            alt="Aventones Logo"
+          />
         </div>
       </div>
 
@@ -44,6 +47,19 @@
             </div>
           </div>
 
+          <!-- ID number and birth date input group -->
+          <div class="input-group">
+            <div class="input-item">
+              <label for="idNumber">ID Number</label>
+              <input type="text" id="idNumber" required />
+            </div>
+
+            <div class="input-item">
+              <label for="birthDate">Date of Birth</label>
+              <input type="date" id="birthDate" required />
+            </div>
+          </div>
+
           <!-- Email input -->
           <div class="input-item">
             <label for="email">Email</label>
@@ -63,39 +79,10 @@
             </div>
           </div>
 
-          <!-- Address input -->
+          <!-- Phone number input -->
           <div class="input-item">
-            <label for="address">Address</label>
-            <input type="text" id="address" required />
-          </div>
-
-          <!-- Location input group -->
-          <div class="input-group">
-            <div class="input-item">
-              <label for="country">Country</label>
-              <select id="country" required>
-                <option value>Select a country</option>
-              </select>
-              <script src="../Resources/Scripts/countries.js"></script>
-            </div>
-
-            <div class="input-item">
-              <label for="state">State</label>
-              <input type="text" id="state" required />
-            </div>
-          </div>
-
-          <!-- City and phone number input group -->
-          <div class="input-group">
-            <div class="input-item">
-              <label for="city">City</label>
-              <input type="text" id="city" required />
-            </div>
-
-            <div class="input-item">
-              <label for="phone">Phone Number</label>
-              <input type="text" id="phone" required />
-            </div>
+            <label for="phone">Phone Number</label>
+            <input type="text" id="phone" required />
           </div>
 
           <!-- Links for additional registration options -->
@@ -105,14 +92,15 @@
             </p>
 
             <p class="register-links">
-              Register as driver? <a href="#">Click here</a>
+              Register as driver? <a href="./driverRegister.html">Click here</a>
             </p>
           </div>
 
           <!-- Submit button -->
           <div class="center-button">
-            <button class="register-button"
-              onclick="registerUser()">Sign up</button>
+            <button class="register-button" onclick="registerUser(event)">
+              Sign up
+            </button>
           </div>
         </form>
       </div>

@@ -1,7 +1,7 @@
 :root {
   --primary-color: #428bca;
   --hover-Button-color: #357abd;
-  --link-color: #1071F2;
+  --link-color: #1071f2;
   --secondary-color: #f6f6f6;
   --background-color: #fff;
   --text-color: #000;
@@ -406,11 +406,15 @@ fieldset .input-group input {
   flex: 1;
 }
 
-#timeAdd, #timeEdit, #timeSee {
+#timeAdd,
+#timeEdit,
+#timeSee {
   height: 44px;
 }
 
-#timeSee, #seatsSee, #feeSee {
+#timeSee,
+#seatsSee,
+#feeSee {
   border: var(--background-color);
 }
 
