@@ -4,89 +4,76 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User Registration</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet" />
     <link rel="stylesheet" href="../Resources/Styles/styles.css" />
-    <link rel="stylesheet" href="../Resources/Styles/responsiveDesing.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap"
-      rel="stylesheet"
-    />
+      rel="stylesheet" />
     <link
       href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap"
-      rel="stylesheet"
-    />
+      rel="stylesheet" />
   </head>
   <body>
     <!-- Main container for registration content -->
-    <div class="registration-container">
+    <div class="container registration-container">
       <!-- Logo section -->
-      <div class="logo-container">
+      <div class="logo-container text-center mb-4">
         <div class="logo">
           <img
             src="../Resources/Images/logoAventones.png"
             alt="Aventones Logo"
-          />
+            class="img-fluid" />
         </div>
       </div>
 
-      <h1>User Registration</h1>
+      <h1 class="text-center">User Registration</h1>
       <hr />
 
       <!-- Registration form -->
       <div class="registration-box">
         <form>
           <!-- User name input group -->
-          <div class="input-group">
-            <div class="input-item">
+          <div class="form-row">
+            <div class="form-group col-md-6 input-item">
               <label for="firstName">First Name</label>
-              <input type="text" id="firstName" required />
+              <input type="text" id="firstName" required class="form-control" />
             </div>
 
-            <div class="input-item">
+            <div class="form-group col-md-6 input-item">
               <label for="lastName">Last Name</label>
-              <input type="text" id="lastName" required />
+              <input type="text" id="lastName" required class="form-control" />
             </div>
           </div>
 
           <!-- ID number and birth date input group -->
-          <div class="input-group">
-            <div class="input-item">
+          <div class="form-row">
+            <div class="form-group col-md-6 input-item">
               <label for="idNumber">ID Number</label>
-              <input type="text" id="idNumber" required />
+              <input type="text" id="idNumber" required class="form-control" />
             </div>
 
-            <div class="input-item">
+            <div class="form-group col-md-6 input-item">
               <label for="birthDate">Date of Birth</label>
-              <input type="date" id="birthDate" required />
+              <input type="date" id="birthDate" required class="form-control" />
             </div>
           </div>
 
           <!-- Email input -->
-          <div class="input-item">
+          <div class="form-group input-item">
             <label for="email">Email</label>
-            <input type="email" id="email" required />
-          </div>
-
-          <!-- Password input group -->
-          <div class="input-group">
-            <div class="input-item">
-              <label for="password">Password</label>
-              <input type="password" id="password" required />
-            </div>
-
-            <div class="input-item">
-              <label for="repeatPassword">Repeat Password</label>
-              <input type="password" id="repeatPassword" required />
-            </div>
+            <input type="email" id="email" required class="form-control" />
           </div>
 
           <!-- Phone number input -->
-          <div class="input-item">
+          <div class="form-group input-item">
             <label for="phone">Phone Number</label>
-            <input type="text" id="phone" required />
+            <input type="text" id="phone" required class="form-control" />
           </div>
 
           <!-- Links for additional registration options -->
-          <div class="link-group">
+          <div class="link-group text-center mt-4">
             <p class="register-links">
               Already a user? <a href="../index.html">Login here</a>
             </p>
@@ -97,8 +84,10 @@
           </div>
 
           <!-- Submit button -->
-          <div class="center-button">
-            <button class="register-button" onclick="registerUser(event)">
+          <div class="center-button text-center mt-4">
+            <button
+              class="btn btn-primary register-button"
+              onclick="registerUser(event)">
               Sign up
             </button>
           </div>
@@ -107,7 +96,7 @@
     </div>
 
     <!-- Footer section with navigation -->
-    <footer>
+    <footer class="text-center mt-5">
       <nav>
         <a href="#">Home |</a>
         <a href="#">Rides |</a>
