@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aventones</title>
-    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../Resources/Styles/styles.css" />
     <link
       href="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css"
       rel="stylesheet" />
@@ -51,6 +51,37 @@
     <main>
       <h1>Search rides</h1>
       <hr />
+      <div class="search-rides-container">
+        <!-- Ride search form -->
+        <div class="ride-search">
+          <div class="from-container">
+            <label for="from">From</label>
+            <select id="from">
+              <option value="Quesada">Quesada</option>
+            </select>
+          </div>
+          <div class="to-container">
+            <label for="to">To</label>
+            <select id="to">
+              <option value="Zarcero">Zarcero</option>
+            </select>
+            <button>Find rides</button>
+          </div>
+        </div>
+
+        <!-- Days selection -->
+        <div class="days-select">
+          <label>Days</label>
+          <label><input type="checkbox" /> Mon</label>
+          <label><input type="checkbox" /> Tue</label>
+          <label><input type="checkbox" /> Wed</label>
+          <label><input type="checkbox" /> Thu</label>
+          <label><input type="checkbox" /> Fri</label>
+          <label><input type="checkbox" /> Sat</label>
+          <label><input type="checkbox" /> Sun</label>
+        </div>
+      </div>
+
       <div class="search-rides-container">
         <!-- Ride search form -->
         <div class="ride-search">
@@ -158,5 +189,7 @@
       <br />
       <p>&copy; Aventones.com</p>
     </footer>
+    <script src="../Resources/Scripts/database.js"></script>
+    <script src="../Resources/Scripts/script.js"></script>
   </body>
 </html>

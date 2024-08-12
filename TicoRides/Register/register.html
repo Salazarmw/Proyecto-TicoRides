@@ -36,40 +36,83 @@
         <form>
           <!-- User name input group -->
           <div class="form-row">
-            <div class="form-group col-md-6 input-item">
+            <div class="form-group col-md-6">
               <label for="firstName">First Name</label>
-              <input type="text" id="firstName" required class="form-control" />
+              <input type="text" id="firstName" class="form-control" required />
             </div>
 
-            <div class="form-group col-md-6 input-item">
+            <div class="form-group col-md-6">
               <label for="lastName">Last Name</label>
-              <input type="text" id="lastName" required class="form-control" />
+              <input type="text" id="lastName" class="form-control" required />
             </div>
           </div>
 
           <!-- ID number and birth date input group -->
           <div class="form-row">
-            <div class="form-group col-md-6 input-item">
+            <div class="form-group col-md-6">
               <label for="idNumber">ID Number</label>
-              <input type="text" id="idNumber" required class="form-control" />
+              <input type="text" id="idNumber" class="form-control" required />
             </div>
 
-            <div class="form-group col-md-6 input-item">
+            <div class="form-group col-md-6">
               <label for="birthDate">Date of Birth</label>
-              <input type="date" id="birthDate" required class="form-control" />
+              <input type="date" id="birthDate" class="form-control" required />
             </div>
           </div>
 
           <!-- Email input -->
-          <div class="form-group input-item">
+          <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" required class="form-control" />
+            <input type="email" id="email" class="form-control" required />
           </div>
 
-          <!-- Phone number input -->
-          <div class="form-group input-item">
-            <label for="phone">Phone Number</label>
-            <input type="text" id="phone" required class="form-control" />
+          <!-- Password input group -->
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="password">Password</label>
+              <input type="password" id="password" class="form-control"
+                required />
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="repeatPassword">Repeat Password</label>
+              <input type="password" id="repeatPassword" class="form-control"
+                required />
+            </div>
+          </div>
+
+          <!-- Address input -->
+          <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" id="address" class="form-control" required />
+          </div>
+
+          <!-- Location input group -->
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="country">Country</label>
+              <select id="country" class="form-control" required>
+                <option value>Select a country</option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="state">State</label>
+              <input type="text" id="state" class="form-control" required />
+            </div>
+          </div>
+
+          <!-- City and phone number input group -->
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="city">City</label>
+              <input type="text" id="city" class="form-control" required />
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="phone">Phone Number</label>
+              <input type="text" id="phone" class="form-control" required />
+            </div>
           </div>
 
           <!-- Links for additional registration options -->
@@ -86,8 +129,9 @@
           <!-- Submit button -->
           <div class="center-button text-center mt-4">
             <button
+              type="button"
               class="btn btn-primary register-button"
-              onclick="registerUser(event)">
+              id="register-button">
               Sign up
             </button>
           </div>
@@ -108,6 +152,14 @@
       <br />
       <p>&copy; Aventones.com</p>
     </footer>
-    <script src="../script.js"></script>
+    <script src="../Resources/Scripts/database.js"></script>
+    <script src="../Resources/Scripts/script.js"></script>
+    <script src="../Resources/Scripts/countries.js"></script>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </body>
 </html>

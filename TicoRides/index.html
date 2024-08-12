@@ -1,76 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aventones Login</title>
+    <link rel="stylesheet" href="./Resources/Styles/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aventones Login</title>
-  <link rel="stylesheet" href="./Resources/Styles/styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap"
-    rel="stylesheet" />
-</head>
+  <body>
+    <!-- Main container for login content -->
+    <div class="login-container">
+      <!-- Logo section -->
+      <div class="logo-container">
+        <h1 class="logo">
+          <img src="Resources/Images/logoAventones.png" alt="Aventones Logo" />
+        </h1>
+      </div>
 
-<body>
-  <!-- Main container for login content -->
-  <div class="login-container">
-    <!-- Logo section -->
-    <div class="logo-container">
-      <h1 class="logo">
-        <img src="Resources/Images/logoAventones.png" alt="Aventones Logo" />
-      </h1>
+      <!-- Google login button section -->
+      <div class="button-container">
+        <button class="google-login">
+          <img src="Resources/Images/logoGoogle.png" alt="Google Logo" />
+          <span>Sign in with Google</span>
+        </button>
+      </div>
+
+      <!-- Standard login form -->
+      <div class="login-box">
+        <p>Or</p>
+        <form>
+          <!-- Username input -->
+          <div class="form-group">
+            <label for="usernameLogin">Username</label>
+            <input type="text" id="usernameLogin" required />
+          </div>
+
+          <!-- Password input -->
+          <div class="form-group">
+            <label for="passwordLogin">Password</label>
+            <input type="password" id="passwordLogin" required />
+          </div>
+
+          <!-- Registration link -->
+          <p class="register">
+            Not a user? <a href="./Register/register.html">Register Now</a>
+          </p>
+
+          <!-- Login button -->
+          <div class="center-button">
+            <button type="submit" id="login-button">Login</button>
+          </div>
+        </form>
+      </div>
     </div>
 
-    <!-- Google login button section -->
-    <div class="button-container">
-      <button class="google-login">
-        <img src="Resources/Images/logoGoogle.png" alt="Google Logo" />
-        <span>Sign in with Google</span>
-      </button>
-    </div>
-
-    <!-- Standard login form -->
-    <div class="login-box">
-      <p>Or</p>
-      <form onsubmit="authenticateUser(event)">
-        <!-- Username input -->
-        <div class="form-group">
-          <label for="usernameLogin">Username</label>
-          <input type="text" id="usernameLogin" required />
-        </div>
-
-        <!-- Password input -->
-        <div class="form-group">
-          <label for="passwordLogin">Password</label>
-          <input type="password" id="passwordLogin" required />
-        </div>
-
-        <!-- Registration link -->
-        <p class="register">
-          Not a user? <a href="./Register/register.html">Register Now</a>
-        </p>
-
-        <!-- Login button -->
-        <div class="center-button">
-          <button type="submit">Login</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- Footer section with navigation -->
-  <footer>
-    <nav>
-      <a href="#">Home |</a>
-      <a href="#">Rides |</a>
-      <a href="#">Bookings |</a>
-      <a href="#">Settings |</a>
-      <a href="./index.html">Login |</a>
-      <a href="./Register/register.html">Register</a>
-    </nav>
-    <br />
-    <p>&copy; Aventones.com</p>
-  </footer>
-
-  <script src="./Resources/Scripts/script.js"></script>
-</body>
+    <!-- Footer section with navigation -->
+    <footer>
+      <nav>
+        <a href="#">Home |</a>
+        <a href="#">Rides |</a>
+        <a href="#">Bookings |</a>
+        <a href="#">Settings |</a>
+        <a href="./index.html">Login |</a>
+        <a href="./Register/register.html">Register</a>
+      </nav>
+      <br />
+      <p>&copy; Aventones.com</p>
+    </footer>
+    <script src="./Resources/Scripts/database.js"></script>
+    <script src="./Resources/Scripts/script.js"></script>
+  </body>
 </html>
