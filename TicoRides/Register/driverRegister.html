@@ -119,16 +119,21 @@
           <!-- Vehicle information input group -->
           <div class="form-row">
             <div class="form-group col-md-4">
-              <label for="vehicleBrand">Vehicle Brand</label>
+              <label for="add-car-brand">Car Brand</label>
               <input
-                type="text"
-                id="vehicleBrand"
-                class="form-control"
-                required />
-            </div>
+                  list="car-brands"
+                  id="add-car-brand"
+                  name="car-brand"
+                  class="form-control"
+                  required
+              />
+              <datalist id="car-brands">
+                  <!-- Options will be populated here -->
+              </datalist>
+          </div>
 
             <div class="form-group col-md-4">
-              <label for="vehicleModel">Vehicle Model</label>
+              <label for="vehicleModel">Car Model</label>
               <input
                 type="text"
                 id="vehicleModel"
@@ -137,7 +142,7 @@
             </div>
 
             <div class="form-group col-md-4">
-              <label for="vehicleYear">Vehicle Year</label>
+              <label for="vehicleYear">Car Year</label>
               <input
                 type="number"
                 id="vehicleYear"
@@ -192,9 +197,13 @@
       <br />
       <p>&copy; Aventones.com</p>
     </footer>
+    <script src="../Resources/Scripts/database.js"></script>
+    <script src="../Resources/Scripts/countries.js"></script>
+    <script src="../Resources/Scripts/carBrands.js"></script>
     <script src="../Resources/Scripts/script.js"></script>
     <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script

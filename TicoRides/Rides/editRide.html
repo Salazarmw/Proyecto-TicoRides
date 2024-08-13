@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aventones - Edit Ride</title>
-    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../Resources/Styles/styles.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap"
       rel="stylesheet" />
@@ -47,17 +47,16 @@
     <main>
       <h1>Edit Ride</h1>
       <hr />
-      <form>
+      <form id="edit-ride-form">
         <!-- Departure and Arrival inputs -->
         <div class="input-group">
           <div class="input-item">
             <label for="departure">Departure from</label>
-            <input type="text" id="departure" name="departure"
-              value="Quesada" />
+            <input type="text" id="departure" name="departure" />
           </div>
           <div class="input-item">
             <label for="arrival">Arrive To</label>
-            <input type="text" id="arrival" name="arrival" value="Zarcero" />
+            <input type="text" id="arrival" name="arrival" />
           </div>
         </div>
 
@@ -87,19 +86,20 @@
           <div class="input-group">
             <div class="input-item">
               <label for="timeEdit">Time</label>
-              <select id="timeEdit" name="time">
-                <option value="10:00 am">10:00 am</option>
-              </select>
+              <input type="time" id="timeEdit" name="time" required />
             </div>
             <div class="input-item">
               <label for="seatsEdit">Seats</label>
-              <input type="number" id="seatsEdit" value="2" min="1" max="4"
-                step="1" />
+              <input
+                type="number"
+                id="seatsEdit"
+                name="seats"
+                min="1"
+                max="4" />
             </div>
             <div class="input-item">
               <label for="feeEdit">Fee</label>
-              <input type="number" id="feeEdit" value="15" min="1" max="30"
-                step="1" />
+              <input type="number" id="feeEdit" name="fee" min="1" max="30" />
             </div>
           </div>
         </div>
@@ -108,22 +108,30 @@
         <fieldset>
           <legend>Vehicle Details</legend>
           <div class="form-group">
-            <label for="make">Make</label>
-            <select id="make" name="make">
-              <option value="Nissan">Nissan</option>
-            </select>
+            <label for="car-brand">Make</label>
+            <select id="car-brand" name="car-brand" disabled required></select>
           </div>
           <div class="form-group">
             <label for="model">Model</label>
-            <input type="text" id="model" name="model" placeholder="Car Model"
-              value="Pathfinder" />
+            <input
+              type="text"
+              id="car-model"
+              name="model"
+              placeholder="Car Model"
+              disabled
+              required />
           </div>
           <div class="form-group">
-            <div class="input-item">
-              <label for="year">Year</label>
-              <input type="number" id="year" value="2015" min="1999" max="2025"
-                step="1" />
-            </div>
+            <label for="car-year">Year</label>
+            <input
+              type="number"
+              id="car-year"
+              name="year"
+              min="1999"
+              max="2025"
+              step="1"
+              disabled
+              required />
           </div>
         </fieldset>
 
@@ -133,8 +141,9 @@
             <a href="../Rides/myRides.html">Cancel</a>
           </div>
           <div class="button-container">
-            <button class="save-button"
-              onclick="window.location.href='../Rides/myRides.html'">Save</button>
+            <button class="save-button" id="edit-ride-button" type="button">
+              Save
+            </button>
           </div>
         </div>
       </form>
@@ -150,7 +159,11 @@
         <a href="../index.html">Login |</a>
         <a href="../Register/register.html">Register</a>
       </nav>
+      <br />
       <p>&copy; Aventones.com</p>
     </footer>
+    <script src="../Resources/Scripts/carBrands.js"></script>
+    <script src="../Resources/Scripts/database.js"></script>
+    <script src="../Resources/Scripts/script.js"></script>
   </body>
 </html>

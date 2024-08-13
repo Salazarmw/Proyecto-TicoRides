@@ -486,6 +486,10 @@ fieldset .input-group input {
   padding-right: 10px;
 }
 
+select.form-control {
+  height: calc(2.25rem + 2px); /* Adjusts to match the default input height */
+}
+
 /* Home Styles */
 header {
   width: 100%;

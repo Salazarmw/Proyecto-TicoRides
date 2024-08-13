@@ -49,7 +49,7 @@ function saveUser() {
   }
 
   // Check if this is a supplier registration
-  const vehicleBrand = document.getElementById("vehicleBrand")?.value.trim();
+  const vehicleBrand = document.getElementById("add-car-brand")?.value.trim();
   const vehicleModel = document.getElementById("vehicleModel")?.value.trim();
   const vehicleYear = document.getElementById("vehicleYear")?.value;
   const licensePlate = document.getElementById("licensePlate")?.value.trim();
@@ -83,7 +83,7 @@ function saveUser() {
   const users = getFromLocalStorage("users") || [];
 
   // Check if the user already exists
-  if (users.some((user) => user.email === email)) {
+  if (users.some((user) => user.idNumber === idNumber)) {
     alert("User already exists!");
     return;
   }
@@ -92,31 +92,30 @@ function saveUser() {
   return saveToLocalStorage("users", newUser);
 }
 
+// Function to authenticate if the user is registered
 function authenticateUser(event) {
-  event.preventDefault(); // Prevenir la recarga de la página
+  event.preventDefault(); // Prevent page reload
 
-  // Obtener valores del formulario
+  // Get values ​​from the form
   const username = document.getElementById("usernameLogin").value.trim();
   const password = document.getElementById("passwordLogin").value;
 
-  // Verificar que todos los campos estén llenos
+  // Check that all fields are filled in
   if (!username || !password) {
     alert("All fields are required!");
     return;
   }
 
-  // Obtener usuarios almacenados en el local storage
+  // Get users stored in local storage
   const users = getFromLocalStorage("users") || [];
 
-  // Verificar si el usuario existe y las credenciales coinciden
+  // Check if the user exists and the credentials match
   const user = users.find(
-    (user) => user.email === username && user.password === password
+    (user) => user.idNumber === username && user.password === password
   );
 
   if (user) {
-    // Guardar información del usuario logueado en local storage
     localStorage.setItem("loggedInUser", JSON.stringify(user));
-    // Redirigir a la página de inicio
     window.location.href = "./Home/home.html";
   } else {
     alert("Invalid username or password!");
@@ -133,11 +132,208 @@ function handleSaveUserAndRedirect(redirectUrl) {
   }
 }
 
-function bindEvents() {
-  const loginForm = document.querySelector("form");
+// Function to save a ride
+function saveRide() {
 
-  if (loginForm) {
-    loginForm.addEventListener("submit", authenticateUser);
+  // Retrieve the ride data from the form
+  const departureLocation = document.getElementById("departure-location").value;
+  const arrivalLocation = document.getElementById("arrival-location").value;
+  const selectedDays = Array.from(
+    document.querySelectorAll('input[name="ride-days"]:checked')
+  ).map((day) => day.value);
+  const time = document.getElementById("timeAdd").value;
+  const seats = document.getElementById("seatsAdd").value;
+  const fee = document.getElementById("feeAdd").value;
+  const car =
+    document.getElementById("car-brand").value +
+    " " +
+    document.getElementById("car-model").value +
+    " " +
+    document.getElementById("car-year").value;
+
+  // Check if all fields are filled
+  if (
+    !departureLocation ||
+    !arrivalLocation ||
+    selectedDays.length === 0 ||
+    !time ||
+    !seats ||
+    !fee
+  ) {
+    alert("Please fill in all fields.");
+    return; // Exit the function if any field is missing
+  }
+
+  // Retrieve the current user ID from localStorage
+  const currentUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  let newRide;
+
+  // Create a new ride object
+  if (currentUser) {
+    newRide = {
+      departureLocation: departureLocation,
+      arrivalLocation: arrivalLocation,
+      selectedDays: selectedDays,
+      departureTime: time,
+      seatsAvailable: seats,
+      fee: fee,
+      createdBy: currentUser.idNumber, // Assign the current user ID to the ride
+      car: car,
+      id: Date.now(), // Generate a unique ID using the current timestamp
+    };
+  } else {
+    console.error(
+      "No user is logged in or user data is missing in localStorage."
+    );
+  }
+
+  if (saveToLocalStorage("rides", newRide)) {
+    alert("Ride added successfully!");
+    window.location.href = "../Rides/myRides.html";
+  } else {
+    alert("Error adding ride");
+    // Reset the form fields after submission
+    document.getElementById("add-ride-form").reset();
+  }
+}
+
+// Function to update a ride
+function updateRide(event) {
+  event.preventDefault();
+
+  const rideId = getParameterByName("id");
+  let rides = JSON.parse(localStorage.getItem("rides")) || [];
+
+  const updatedRide = {
+    id: parseInt(rideId),
+    departureLocation: document.getElementById("departure").value,
+    arrivalLocation: document.getElementById("arrival").value,
+    selectedDays: Array.from(
+      document.querySelectorAll('input[name="days"]:checked')
+    ).map((day) => day.value),
+    departureTime: document.getElementById("timeEdit").value,
+    seatsAvailable: document.getElementById("seatsEdit").value,
+    fee: document.getElementById("feeEdit").value,
+    car:
+      document.getElementById("car-brand").value +
+      " " +
+      document.getElementById("car-model").value +
+      " " +
+      document.getElementById("car-year").value,
+  };
+
+  rides = rides.map((ride) =>
+    ride.id === updatedRide.id ? updatedRide : ride
+  );
+
+  localStorage.setItem("rides", JSON.stringify(rides));
+
+  alert("Ride updated successfully!");
+  window.location.href = "../Rides/myRides.html";
+}
+
+// Function to set current time in the time input
+function setCurrentTime() {
+  const timeInput = document.getElementById("timeAdd");
+  if (timeInput) {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    timeInput.value = `${hours}:${minutes}`;
+  }
+}
+
+// Function to get URL parameters
+function getParameterByName(name) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(name);
+}
+
+// Function to load rides into the table
+function loadRides() {
+  const table = document.getElementById("my-rides-table");
+  const rides = JSON.parse(localStorage.getItem("rides")) || [];
+
+  // Clear the table
+  table.innerHTML = "";
+
+  rides.forEach((ride) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td class="flex-cell">${ride.departureLocation}</td>
+      <td class="flex-cell">${ride.arrivalLocation}</td>
+      <td class="flex-cell">${ride.seatsAvailable}</td>
+      <td class="flex-cell">${ride.car}</td>
+      <td class="flex-cell">$${ride.fee}</td>
+      <td class="flex-cell">
+        <a href="../Rides/editRide.html?id=${ride.id}">Edit</a>
+        <span>|</span>
+        <a href="#" onclick="deleteRide(${ride.id})">Delete</a>
+      </td>
+    `;
+    table.appendChild(row);
+  });
+}
+
+// Function to delete a ride
+function deleteRide(id) {
+  let rides = JSON.parse(localStorage.getItem("rides")) || [];
+  rides = rides.filter((ride) => ride.id !== id);
+  localStorage.setItem("rides", JSON.stringify(rides));
+  loadRides();
+}
+
+function loadCarData() {
+  // Retrieve the current user logged from localStorage
+  const currentUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+  // Ensure the user data exists before trying to access its properties
+  if (currentUser) {
+    // Fill in the fields with the vehicle data of the currently logged in user
+    if (document.getElementById("car-brand")) {
+      document.getElementById("car-brand").value = currentUser.vehicleBrand;
+    }
+    if (document.getElementById("car-model")) {
+      document.getElementById("car-model").value = currentUser.vehicleModel;
+    }
+    if (document.getElementById("car-year")) {
+      document.getElementById("car-year").value = currentUser.vehicleYear;
+    }
+  } else {
+    console.error(
+      "No user is logged in or user data is missing in localStorage."
+    );
+  }
+}
+
+function loadRideData() {
+  const rideId = getParameterByName("id");
+  const rides = JSON.parse(localStorage.getItem("rides")) || [];
+
+  const ride = rides.find(ride => ride.id === parseInt(rideId));
+
+  if (ride) {
+    document.getElementById("departure").value = ride.departureLocation;
+    document.getElementById("arrival").value = ride.arrivalLocation;
+    document.getElementById("timeEdit").value = ride.departureTime;
+    document.getElementById("seatsEdit").value = ride.seatsAvailable;
+    document.getElementById("feeEdit").value = ride.fee;
+    document.getElementById("car-brand").value = ride.car.split(" ")[0];
+    document.getElementById("car-model").value = ride.car.split(" ")[1];
+    document.getElementById("car-year").value = ride.car.split(" ")[2];
+
+    // Set the selected days
+    document.querySelectorAll('input[name="days"]').forEach((checkbox) => {
+      checkbox.checked = ride.selectedDays.includes(checkbox.value);
+    });
+  }
+}
+
+function bindEvents() {
+  if (document.getElementById("loginForm")) {
+    document
+      .getElementById("loginForm")
+      .addEventListener("submit", authenticateUser);
   }
   if (document.getElementById("register-button")) {
     document
@@ -146,6 +342,32 @@ function bindEvents() {
         handleSaveUserAndRedirect("../index.html");
       });
   }
+  if (document.getElementById("add-ride-button")) {
+    document
+      .getElementById("add-ride-button")
+      .addEventListener("click", saveRide);
+  }
+  if (document.getElementById("edit-ride-button")) {
+    document
+      .getElementById("edit-ride-button")
+      .addEventListener("click", updateRide);
+  }
 }
+
+// Initialize the page
+window.onload = function () {
+  if (document.getElementById("my-rides-table")) {
+    loadRides();
+  }
+
+  if (document.getElementById("add-ride-form")) {
+    setCurrentTime(); // Set current time when adding a ride
+    loadCarData(); // Sets the car data of the currently logged in user
+  }
+
+  if (document.getElementById("edit-ride-form")) {
+    loadRideData();
+  }
+};
 
 document.addEventListener("DOMContentLoaded", bindEvents);
