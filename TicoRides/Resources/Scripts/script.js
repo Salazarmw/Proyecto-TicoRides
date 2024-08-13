@@ -12,7 +12,7 @@ function saveUser() {
   const state = document.getElementById("state").value;
   const city = document.getElementById("city").value;
   const phone = document.getElementById("phone").value;
-  let type = "Client"; // Default type
+  let type = "User"; // Default type
 
   // Email validation regex
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -48,14 +48,14 @@ function saveUser() {
     return;
   }
 
-  // Check if this is a supplier registration
+  // Check if this is a driver registration
   const vehicleBrand = document.getElementById("add-car-brand")?.value.trim();
   const vehicleModel = document.getElementById("vehicleModel")?.value.trim();
   const vehicleYear = document.getElementById("vehicleYear")?.value;
   const licensePlate = document.getElementById("licensePlate")?.value.trim();
 
   if (vehicleBrand || vehicleModel || vehicleYear || licensePlate) {
-    type = "Supplier";
+    type = "Driver";
   }
 
   // Create user object
@@ -72,7 +72,7 @@ function saveUser() {
     city,
     phone,
     type,
-    // Only include these fields if registering as a supplier
+    // Only include these fields if registering as a driver
     vehicleBrand: vehicleBrand || null,
     vehicleModel: vehicleModel || null,
     vehicleYear: vehicleYear || null,
