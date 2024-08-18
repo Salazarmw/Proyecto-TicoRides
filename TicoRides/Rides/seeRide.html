@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Aventones - See Ride</title>
-  <link rel="stylesheet" href="../styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../Resources/Styles/styles.css" />
+  <link rel="stylesheet" href="../Resources/Styles/mobileDesign.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap"
+    rel="stylesheet" />
 </head>
+
 <body>
   <!-- Logo section -->
   <div class="logo-container">
@@ -39,14 +44,15 @@
     </nav>
   </header>
 
-  <!-- Main content: Edit Ride -->
   <main>
-    <h1>Quesada - Zarcero</h1>
+    <div id="ride-route">
+      <h1>Quesada - Zarcero</h1>
+    </div>
     <hr />
     <!-- User profile -->
     <div class="profile">
       <img src="../Resources/Images/userIcon.png" alt="User Profile" />
-      <span>barroyo</span>
+      <span id="see-ride-driver">barroyo</span>
     </div>
 
     <!-- Form to edit ride details -->
@@ -72,15 +78,13 @@
         <!-- Inputs for time, seats, fee -->
         <div class="input-group">
           <label for="timeSee">Time</label>
-          <select id="timeSee" name="time">
-            <option value="10:00 am">10:00 am</option>
-          </select>
+          <input type="time" id="timeSee" name="time" disabled />
 
           <label for="seatsSee">Seats</label>
-          <input type="number" id="seatsSee" value="2" min="1" max="4" step="1" />
+          <input type="number" id="seatsSee" value="2" min="1" max="4" step="1" required />
 
           <label for="feeSee">Fee</label>
-          <input type="number" id="feeSee" value="15" min="1" max="30" step="1" />
+          <input type="number" id="feeSee" value="15" min="1" max="30" step="1" disabled />
         </div>
       </div>
 
@@ -111,7 +115,9 @@
           <a href="../Home/home.html">Cancel</a>
         </div>
         <div class="button-container">
-          <button class="save-button" onclick="window.location.href='../Rides/myRides.html'">Request</button>
+          <button class="save-button" onclick="window.location.href='../Rides/myRides.html'">
+            Request
+          </button>
         </div>
       </div>
     </form>
@@ -130,4 +136,5 @@
     <p>&copy; Aventones.com</p>
   </footer>
 </body>
+
 </html>

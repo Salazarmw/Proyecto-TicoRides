@@ -308,7 +308,7 @@ function loadCarData() {
 
 function loadRideData() {
   const rideId = getParameterByName("id");
-  const rides = JSON.parse(localStorage.getItem("rides")) || [];
+  const rides = JSON.parse(localStorage.getItem("rides"));
 
   const ride = rides.find(ride => ride.id === parseInt(rideId));
 
@@ -327,6 +327,60 @@ function loadRideData() {
       checkbox.checked = ride.selectedDays.includes(checkbox.value);
     });
   }
+}
+
+function getUserById(userId) {
+  const users = JSON.parse(localStorage.getItem('users'));
+  return users.find(user => user.idNumber === userId) || null;
+}
+
+function createRideCard(driver, from, to, seats, car, fee, link) {
+  const ridesCardsContainer = document.getElementById('rides-cards');
+
+  const card = `
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <img src="../Resources/Images/userIcon.png" class="card-img-top" alt="Driver">
+        <div class="card-body">
+          <h5 class="card-title">Driver: ${driver}</h5>
+          <p class="card-text">
+            <strong>From:</strong> ${from}<br>
+            <strong>To:</strong> ${to}<br>
+            <strong>Seats:</strong> ${seats}<br>
+            <strong>Car:</strong> ${car}<br>
+            <strong>Fee:</strong> ${fee}
+          </p>
+          <a href="${link}" class="btn btn-primary">Request</a>
+        </div>
+      </div>
+    </div>
+  `;
+
+  ridesCardsContainer.insertAdjacentHTML('beforeend', card);
+}
+
+function loadRideCards() {
+  // Retrieve rides from localStorage
+  const rides = JSON.parse(localStorage.getItem('rides'));
+
+  // Iterate over each ride and add it as a card
+  rides.forEach(ride => {
+    const user = getUserById(ride.createdBy);
+    
+    if (user) {
+      createRideCard(
+        user.firstName,                // Asumiendo que el nombre del usuario está en la propiedad 'name'
+        ride.departureLocation,
+        ride.arrivalLocation,
+        ride.seatsAvailable,
+        ride.car,
+        ride.fee,
+        `../Rides/seeRide.html?id=${ride.id}` // Link with ride ID
+      );
+    } else {
+      console.error(`User with ID ${ride.createdBy} not found.`);
+    }
+  });
 }
 
 function bindEvents() {
@@ -367,6 +421,10 @@ window.onload = function () {
 
   if (document.getElementById("edit-ride-form")) {
     loadRideData();
+  }
+
+  if (document.getElementById("mobile-rides-container")) {
+    loadRideCards();
   }
 };
 
