@@ -5,7 +5,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Aventones</title>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+  <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
   <link rel="stylesheet" href="../Resources/Styles/styles.css" />
   <link rel="stylesheet" href="../Resources/Styles/mobileDesign.css" />
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css" rel="stylesheet" />
@@ -22,26 +25,55 @@
 
   <!-- Header with navigation -->
   <header>
-    <nav class="main-nav">
-      <ul>
-        <li><a href="../Home/home.html" class="active">Home</a></li>
-        <li><a href="../Rides/myRides.html">Rides</a></li>
-        <li><a href="../Booking/booking.html">Bookings</a></li>
-      </ul>
-      <div class="right-container">
-        <!-- Search bar -->
-        <div class="search-container">
-          <input type="text" placeholder="Search..." />
-        </div>
-        <!-- User menu with dropdown -->
-        <div class="user-menu">
-          <button class="user-icon">
-            <img src="../Resources/Images/userIcon.png" alt="User Menu" />
-          </button>
-          <div class="dropdown-content">
-            <a href="../index.html">Logout</a>
-            <a href="../Home/editProfile.html">Settings</a>
-          </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="../Home/home.html">Home</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="../Rides/myRides.html">Rides</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../Booking/booking.html">Bookings</a>
+          </li>
+        </ul>
+        <div class="right-container">
+          <form class="form-inline my-2 my-lg-0">
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button
+              class="btn btn-outline-success my-2 my-sm-0"
+              type="submit"
+            >
+              Search
+            </button>
+            <div class="user-menu">
+              <button class="user-icon">
+                <img src="../Resources/Images/userIcon.png" alt="User Menu" />
+              </button>
+              <div class="dropdown-content">
+                <a href="../index.html">Logout</a>
+                <a href="../Home/editProfile.html">Settings</a>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </nav>
@@ -194,5 +226,4 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-
 </html>

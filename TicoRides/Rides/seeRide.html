@@ -1,140 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aventones - See Ride</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../Resources/Styles/styles.css" />
+    <link rel="stylesheet" href="../Resources/Styles/mobileDesign.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aventones - See Ride</title>
-  <link rel="stylesheet" href="../Resources/Styles/styles.css" />
-  <link rel="stylesheet" href="../Resources/Styles/mobileDesign.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap"
-    rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap"
-    rel="stylesheet" />
-</head>
-
-<body>
-  <!-- Logo section -->
-  <div class="logo-container">
-    <img src="../Resources/Images/logoAventones.png" alt="Aventones Logo" />
-  </div>
-
-  <!-- Navigation bar -->
-  <header>
-    <nav class="main-nav">
-      <ul>
-        <li><a href="../Home/home.html">Home</a></li>
-        <li><a href="../Rides/myRides.html" class="active">Rides</a></li>
-        <li><a href="../Booking/booking.html">Bookings</a></li>
-      </ul>
-      <div class="right-container">
-        <div class="search-container">
-          <input type="text" placeholder="Search..." />
-        </div>
-        <div class="user-menu">
-          <button class="user-icon">
-            <img src="../Resources/Images/userIcon.png" alt="User Menu" />
-          </button>
-          <div class="dropdown-content">
-            <a href="../index.html">Logout</a>
-            <a href="../Home/editProfile.html">Settings</a>
-          </div>
-        </div>
-      </div>
-    </nav>
-  </header>
-
-  <main>
-    <div id="ride-route">
-      <h1>Quesada - Zarcero</h1>
-    </div>
-    <hr />
-    <!-- User profile -->
-    <div class="profile">
-      <img src="../Resources/Images/userIcon.png" alt="User Profile" />
-      <span id="see-ride-driver">barroyo</span>
+  <body>
+    <!-- Logo section -->
+    <div class="logo-container">
+      <img src="../Resources/Images/logoAventones.png" alt="Aventones Logo" />
     </div>
 
-    <!-- Form to edit ride details -->
-    <form>
-      <div class="route-container">
-        <p>Departure from<span>Quesada</span></p>
-        <p>Arrive To<span>Zarcero</span></p>
+    <!-- Navigation bar -->
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="../Home/home.html">Home</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="../Rides/myRides.html">Rides</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../Booking/booking.html">Bookings</a>
+            </li>
+          </ul>
+          <div class="right-container">
+            <form class="form-inline my-2 my-lg-0">
+              <input
+                class="form-control mr-sm-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button
+                class="btn btn-outline-success my-2 my-sm-0"
+                type="submit"
+              >
+                Search
+              </button>
+              <div class="user-menu">
+                <button class="user-icon">
+                  <img src="../Resources/Images/userIcon.png" alt="User Menu" />
+                </button>
+                <div class="dropdown-content">
+                  <a href="../index.html">Logout</a>
+                  <a href="../Home/editProfile.html">Settings</a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div id="ride-route">
+        <h1>Quesada - Zarcero</h1>
+      </div>
+      <hr />
+      <!-- User profile -->
+      <div class="profile">
+        <img src="../Resources/Images/userIcon.png" alt="User Profile" />
+        <span id="see-ride-driver">barroyo</span>
       </div>
 
-      <!-- Ride details -->
-      <div class="ride-data-container">
-        <label>Days</label>
-        <div class="days-select">
-          <label><input type="checkbox" name="days" value="Mon" checked />Mon</label>
-          <label><input type="checkbox" name="days" value="Tue" checked />Tue</label>
-          <label><input type="checkbox" name="days" value="Wed" checked />Wed</label>
-          <label><input type="checkbox" name="days" value="Thu" />Thu</label>
-          <label><input type="checkbox" name="days" value="Fri" />Fri</label>
-          <label><input type="checkbox" name="days" value="Sat" />Sat</label>
-          <label><input type="checkbox" name="days" value="Sun" />Sun</label>
+      <!-- Form to edit ride details -->
+      <form>
+        <div class="route-container">
+          <p>Departure from<span>Quesada</span></p>
+          <p>Arrive To<span>Zarcero</span></p>
         </div>
 
-        <!-- Inputs for time, seats, fee -->
-        <div class="input-group">
-          <label for="timeSee">Time</label>
-          <input type="time" id="timeSee" name="time" disabled />
-
-          <label for="seatsSee">Seats</label>
-          <input type="number" id="seatsSee" value="2" min="1" max="4" step="1" required />
-
-          <label for="feeSee">Fee</label>
-          <input type="number" id="feeSee" value="15" min="1" max="30" step="1" disabled />
-        </div>
-      </div>
-
-      <!-- Vehicle details -->
-      <fieldset>
-        <legend>Vehicle Details</legend>
-        <div class="input-group">
-          <div>
-            <label for="make">Make</label>
-            <input type="text" id="make" name="make" value="Nissan" />
+        <!-- Ride details -->
+        <div class="ride-data-container">
+          <label>Days</label>
+          <div class="days-select">
+            <label
+              ><input
+                type="checkbox"
+                name="days"
+                value="Mon"
+                checked
+              />Mon</label
+            >
+            <label
+              ><input
+                type="checkbox"
+                name="days"
+                value="Tue"
+                checked
+              />Tue</label
+            >
+            <label
+              ><input
+                type="checkbox"
+                name="days"
+                value="Wed"
+                checked
+              />Wed</label
+            >
+            <label><input type="checkbox" name="days" value="Thu" />Thu</label>
+            <label><input type="checkbox" name="days" value="Fri" />Fri</label>
+            <label><input type="checkbox" name="days" value="Sat" />Sat</label>
+            <label><input type="checkbox" name="days" value="Sun" />Sun</label>
           </div>
 
-          <div>
-            <label for="model">Model</label>
-            <input type="text" id="model" name="model" value="March" />
+          <!-- Inputs for time, seats, fee -->
+          <div class="input-group">
+            <label for="timeSee">Time</label>
+            <input type="time" id="timeSee" name="time" disabled />
+
+            <label for="seatsSee">Seats</label>
+            <input
+              type="number"
+              id="seatsSee"
+              value="2"
+              min="1"
+              max="4"
+              step="1"
+              required
+            />
+
+            <label for="feeSee">Fee</label>
+            <input
+              type="number"
+              id="feeSee"
+              value="15"
+              min="1"
+              max="30"
+              step="1"
+              disabled
+            />
           </div>
+        </div>
 
-          <div>
-            <label for="year">Year</label>
-            <input type="number" id="year" value="2020" min="1999" max="2025" step="1" />
+        <!-- Vehicle details -->
+        <fieldset>
+          <legend>Vehicle Details</legend>
+          <div class="input-group">
+            <div>
+              <label for="make">Make</label>
+              <input type="text" id="make" name="make" value="Nissan" />
+            </div>
+
+            <div>
+              <label for="model">Model</label>
+              <input type="text" id="model" name="model" value="March" />
+            </div>
+
+            <div>
+              <label for="year">Year</label>
+              <input
+                type="number"
+                id="year"
+                value="2020"
+                min="1999"
+                max="2025"
+                step="1"
+              />
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Buttons: Cancel and Request -->
+        <div class="button-group">
+          <div class="button-container">
+            <a href="../Home/home.html">Cancel</a>
+          </div>
+          <div class="button-container">
+            <button
+              class="save-button"
+              onclick="window.location.href='../Rides/myRides.html'"
+            >
+              Request
+            </button>
           </div>
         </div>
-      </fieldset>
+      </form>
+    </main>
 
-      <!-- Buttons: Cancel and Request -->
-      <div class="button-group">
-        <div class="button-container">
-          <a href="../Home/home.html">Cancel</a>
-        </div>
-        <div class="button-container">
-          <button class="save-button" onclick="window.location.href='../Rides/myRides.html'">
-            Request
-          </button>
-        </div>
-      </div>
-    </form>
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    <nav>
-      <a href="../Home/home.html">Home |</a>
-      <a href="../Rides/myRides.html">Rides |</a>
-      <a href="../Booking/booking.html">Bookings |</a>
-      <a href="../Home/editProfile.html">Settings |</a>
-      <a href="../index.html">Login |</a>
-      <a href="../Register/register.html">Register</a>
-    </nav>
-    <p>&copy; Aventones.com</p>
-  </footer>
-</body>
-
+    <!-- Footer -->
+    <footer>
+      <nav>
+        <a href="../Home/home.html">Home |</a>
+        <a href="../Rides/myRides.html">Rides |</a>
+        <a href="../Booking/booking.html">Bookings |</a>
+        <a href="../Home/editProfile.html">Settings |</a>
+        <a href="../index.html">Login |</a>
+        <a href="../Register/register.html">Register</a>
+      </nav>
+      <p>&copy; Aventones.com</p>
+    </footer>
+    <script src="../Resources/Scripts/script.js"></script>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
 </html>

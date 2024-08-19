@@ -497,10 +497,8 @@ header {
   padding: 50px 50px 35px;
 }
 
-.main-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.navbar.navbar-expand-lg.navbar-light.bg-light {
+  padding: 0px;
   background-color: var(--secondary-color);
   border-bottom: 1px solid var(--border-color);
 }
@@ -528,7 +526,7 @@ header {
   display: block;
 }
 
-.main-nav a.active {
+.nav-item.active {
   background-color: var(--primary-color);
   color: var(--secondary-color);
 }
@@ -590,10 +588,6 @@ header {
   display: flex;
   justify-content: space-between;
   gap: 50px;
-}
-
-.search-container {
-  margin: auto;
 }
 
 .search-container input {

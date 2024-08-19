@@ -4,14 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aventones - New Ride</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="../Resources/Styles/styles.css" />
+    <link rel="stylesheet" href="../Resources/Styles/mobileDesign.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap"
-      rel="stylesheet" />
+      rel="stylesheet"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap"
-      rel="stylesheet" />
+      rel="stylesheet"
+    />
   </head>
+
   <body>
     <!-- Logo section -->
     <div class="logo-container">
@@ -20,24 +28,55 @@
 
     <!-- Navigation bar -->
     <header>
-      <nav class="main-nav">
-        <ul>
-          <li><a href="../Home/home.html">Home</a></li>
-          <li><a href="../Rides/myRides.html" class="active">Rides</a></li>
-          <li><a href="../Booking/booking.html">Bookings</a></li>
-        </ul>
-        <div class="right-container">
-          <div class="search-container">
-            <input type="text" placeholder="Search..." />
-          </div>
-          <div class="user-menu">
-            <button class="user-icon">
-              <img src="../Resources/Images/userIcon.png" alt="User Menu" />
-            </button>
-            <div class="dropdown-content">
-              <a href="../index.html">Logout</a>
-              <a href="../Home/editProfile.html">Settings</a>
-            </div>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="../Home/home.html">Home</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="../Rides/myRides.html">Rides</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../Booking/booking.html">Bookings</a>
+            </li>
+          </ul>
+          <div class="right-container">
+            <form class="form-inline my-2 my-lg-0">
+              <input
+                class="form-control mr-sm-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button
+                class="btn btn-outline-success my-2 my-sm-0"
+                type="submit"
+              >
+                Search
+              </button>
+              <div class="user-menu">
+                <button class="user-icon">
+                  <img src="../Resources/Images/userIcon.png" alt="User Menu" />
+                </button>
+                <div class="dropdown-content">
+                  <a href="../index.html">Logout</a>
+                  <a href="../Home/editProfile.html">Settings</a>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </nav>
@@ -56,7 +95,8 @@
               type="text"
               id="departure-location"
               name="departure"
-              required />
+              required
+            />
           </div>
           <div class="input-item">
             <label for="arrival">Arrive To</label>
@@ -68,20 +108,27 @@
         <div class="ride-data-container">
           <label>Days</label>
           <div class="days-select">
-            <label><input type="checkbox" name="ride-days"
-                value="Mon" />Mon</label>
-            <label><input type="checkbox" name="ride-days"
-                value="Tue" />Tue</label>
-            <label><input type="checkbox" name="ride-days"
-                value="Wed" />Wed</label>
-            <label><input type="checkbox" name="ride-days"
-                value="Thu" />Thu</label>
-            <label><input type="checkbox" name="ride-days"
-                value="Fri" />Fri</label>
-            <label><input type="checkbox" name="ride-days"
-                value="Sat" />Sat</label>
-            <label><input type="checkbox" name="ride-days"
-                value="Sun" />Sun</label>
+            <label
+              ><input type="checkbox" name="ride-days" value="Mon" />Mon</label
+            >
+            <label
+              ><input type="checkbox" name="ride-days" value="Tue" />Tue</label
+            >
+            <label
+              ><input type="checkbox" name="ride-days" value="Wed" />Wed</label
+            >
+            <label
+              ><input type="checkbox" name="ride-days" value="Thu" />Thu</label
+            >
+            <label
+              ><input type="checkbox" name="ride-days" value="Fri" />Fri</label
+            >
+            <label
+              ><input type="checkbox" name="ride-days" value="Sat" />Sat</label
+            >
+            <label
+              ><input type="checkbox" name="ride-days" value="Sun" />Sun</label
+            >
           </div>
 
           <!-- Time, Seats, Fee inputs -->
@@ -100,7 +147,8 @@
                 min="1"
                 max="12"
                 step="1"
-                required />
+                required
+              />
             </div>
             <div class="input-item">
               <label for="feeAdd">Fee</label>
@@ -112,7 +160,8 @@
                 min="1"
                 max="30"
                 step="1"
-                required />
+                required
+              />
             </div>
           </div>
         </div>
@@ -132,7 +181,8 @@
               name="model"
               placeholder="Car Model"
               disabled
-              required />
+              required
+            />
           </div>
           <div class="form-group">
             <div class="input-item">
@@ -146,7 +196,8 @@
                 max="2025"
                 step="1"
                 disabled
-                required />
+                required
+              />
             </div>
           </div>
         </fieldset>
@@ -157,8 +208,9 @@
             <a href="../Rides/myRides.html">Cancel</a>
           </div>
           <div class="button-container">
-            <button class="save-button" id="add-ride-button"
-              type="button">Create</button>
+            <button class="save-button" id="add-ride-button" type="button">
+              Create
+            </button>
           </div>
         </div>
       </form>
@@ -182,5 +234,9 @@
     <script>
       loadCarData();
     </script>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </body>
 </html>
