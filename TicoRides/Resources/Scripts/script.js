@@ -134,7 +134,6 @@ function handleSaveUserAndRedirect(redirectUrl) {
 
 // Function to save a ride
 function saveRide() {
-
   // Retrieve the ride data from the form
   const departureLocation = document.getElementById("departure-location").value;
   const arrivalLocation = document.getElementById("arrival-location").value;
@@ -252,14 +251,18 @@ function getParameterByName(name) {
 // Function to load rides into the table
 function loadRides() {
   const table = document.getElementById("my-rides-table");
-  const rides = JSON.parse(localStorage.getItem("rides")) || [];
+  const rides = JSON.parse(localStorage.getItem("rides"));
+  // Retrieve the logged-in user from localStorage
+  const currentUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
   // Clear the table
   table.innerHTML = "";
 
   rides.forEach((ride) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
+    // Check if the ride belongs to the current user
+    if (currentUser.idNumber === ride.createdBy) {
+      const row = document.createElement("tr");
+      row.innerHTML = `
       <td class="flex-cell">${ride.departureLocation}</td>
       <td class="flex-cell">${ride.arrivalLocation}</td>
       <td class="flex-cell">${ride.seatsAvailable}</td>
@@ -271,7 +274,8 @@ function loadRides() {
         <a href="#" onclick="deleteRide(${ride.id})">Delete</a>
       </td>
     `;
-    table.appendChild(row);
+      table.appendChild(row);
+    }
   });
 }
 
@@ -310,7 +314,7 @@ function loadRideData() {
   const rideId = getParameterByName("id");
   const rides = JSON.parse(localStorage.getItem("rides"));
 
-  const ride = rides.find(ride => ride.id === parseInt(rideId));
+  const ride = rides.find((ride) => ride.id === parseInt(rideId));
 
   if (ride) {
     document.getElementById("departure").value = ride.departureLocation;
@@ -330,12 +334,12 @@ function loadRideData() {
 }
 
 function getUserById(userId) {
-  const users = JSON.parse(localStorage.getItem('users'));
-  return users.find(user => user.idNumber === userId) || null;
+  const users = JSON.parse(localStorage.getItem("users"));
+  return users.find((user) => user.idNumber === userId) || null;
 }
 
 function createRideCard(driver, from, to, seats, car, fee, link) {
-  const ridesCardsContainer = document.getElementById('rides-cards');
+  const ridesCardsContainer = document.getElementById("rides-cards");
 
   const card = `
     <div class="col-md-4">
@@ -356,27 +360,82 @@ function createRideCard(driver, from, to, seats, car, fee, link) {
     </div>
   `;
 
-  ridesCardsContainer.insertAdjacentHTML('beforeend', card);
+  ridesCardsContainer.insertAdjacentHTML("beforeend", card);
 }
 
 function loadRideCards() {
-  // Retrieve rides from localStorage
-  const rides = JSON.parse(localStorage.getItem('rides'));
+  // Get the container that holds the ride cards
+  const ridesCardsContainer = document.getElementById('rides-cards');
 
-  // Iterate over each ride and add it as a card
-  rides.forEach(ride => {
+  // Clear any existing ride cards before loading new ones
+  ridesCardsContainer.innerHTML = '';
+
+  // Retrieve rides from localStorage
+  const rides = JSON.parse(localStorage.getItem("rides"));
+
+  // Get the search input values
+  const fromLocation = document.getElementById("from").value.trim();
+  const toLocation = document.getElementById("to").value.trim();
+
+  // Iterate over each ride and add it as a card if it matches the search criteria
+  rides.forEach((ride) => {
     const user = getUserById(ride.createdBy);
-    
+
     if (user) {
-      createRideCard(
-        user.firstName,                // Asumiendo que el nombre del usuario está en la propiedad 'name'
-        ride.departureLocation,
-        ride.arrivalLocation,
-        ride.seatsAvailable,
-        ride.car,
-        ride.fee,
-        `../Rides/seeRide.html?id=${ride.id}` // Link with ride ID
-      );
+      // Case 1: Both fromLocation and toLocation are provided
+      if (fromLocation && toLocation) {
+        if (ride.departureLocation === fromLocation && ride.arrivalLocation === toLocation) {
+          createRideCard(
+            user.firstName,
+            ride.departureLocation,
+            ride.arrivalLocation,
+            ride.seatsAvailable,
+            ride.car,
+            ride.fee,
+            `../Rides/seeRide.html?id=${ride.id}` // Link with ride ID
+          );
+        }
+      }
+      // Case 2: Only fromLocation is provided
+      else if (fromLocation && !toLocation) {
+        if (ride.departureLocation === fromLocation) {
+          createRideCard(
+            user.firstName,
+            ride.departureLocation,
+            ride.arrivalLocation,
+            ride.seatsAvailable,
+            ride.car,
+            ride.fee,
+            `../Rides/seeRide.html?id=${ride.id}` // Link with ride ID
+          );
+        }
+      }
+      // Case 3: Only toLocation is provided
+      else if (!fromLocation && toLocation) {
+        if (ride.arrivalLocation === toLocation) {
+          createRideCard(
+            user.firstName,
+            ride.departureLocation,
+            ride.arrivalLocation,
+            ride.seatsAvailable,
+            ride.car,
+            ride.fee,
+            `../Rides/seeRide.html?id=${ride.id}` // Link with ride ID
+          );
+        }
+      }
+      // Case 4: Neither fromLocation nor toLocation are provided (Show all rides)
+      else if (!fromLocation && !toLocation) {
+        createRideCard(
+          user.firstName,
+          ride.departureLocation,
+          ride.arrivalLocation,
+          ride.seatsAvailable,
+          ride.car,
+          ride.fee,
+          `../Rides/seeRide.html?id=${ride.id}` // Link with ride ID
+        );
+      }
     } else {
       console.error(`User with ID ${ride.createdBy} not found.`);
     }
@@ -406,6 +465,16 @@ function bindEvents() {
       .getElementById("edit-ride-button")
       .addEventListener("click", updateRide);
   }
+  if (document.getElementById("find-rides")) {
+    document
+      .getElementById("find-rides")
+      .addEventListener("click", loadRideCards);
+  }
+  if (document.getElementById("find-rides-mobile")) {
+    document
+      .getElementById("find-rides-mobile")
+      .addEventListener("click", loadRideCards);
+  }
 }
 
 // Initialize the page
@@ -421,10 +490,6 @@ window.onload = function () {
 
   if (document.getElementById("edit-ride-form")) {
     loadRideData();
-  }
-
-  if (document.getElementById("mobile-rides-container")) {
-    loadRideCards();
   }
 };
 
