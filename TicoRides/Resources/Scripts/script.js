@@ -325,6 +325,7 @@ function saveRide() {
 // Function to update a ride
 function updateRide(event) {
   event.preventDefault();
+  const currentUser = getFromLocalStorage("loggedInUser");
 
   const rideId = getParameterByName("id");
   let rides = JSON.parse(localStorage.getItem("rides")) || [];
@@ -339,6 +340,7 @@ function updateRide(event) {
     departureTime: document.getElementById("timeEdit").value,
     seatsAvailable: document.getElementById("seatsEdit").value,
     fee: document.getElementById("feeEdit").value,
+    createdBy: currentUser.idNumber, // Assign the current user ID to the ride
     car:
       document.getElementById("car-brand").value +
       " " +
@@ -354,6 +356,7 @@ function updateRide(event) {
   localStorage.setItem("rides", JSON.stringify(rides));
 
   window.location.href = "../Rides/myRides.html";
+  loadRides();
   alert("Ride updated successfully!");
 }
 
@@ -386,7 +389,7 @@ function loadRides() {
 
   rides.forEach((ride) => {
     // Check if the ride belongs to the current user
-    if (currentUser.idNumber === ride.createdBy) {
+    if (currentUser.idNumber == ride.createdBy) {
       const row = document.createElement("tr");
       row.innerHTML = `
       <td class="flex-cell">${ride.departureLocation}</td>
@@ -792,23 +795,18 @@ function acceptBooking(bookingId) {
   const ride = rides.find((r) => r.id == booking.rideId);
   if (!ride) return;
 
-  // Check if there are enough seats available
-  if (ride.availableSeats >= booking.requestedSeats) {
-    // Update available seats
-    ride.availableSeats -= booking.requestedSeats;
+  // Update available seats
+  ride.availableSeats -= booking.requestedSeats;
 
-    // Update booking status to accepted
-    booking.status = "accepted";
+  // Update booking status to accepted
+  booking.status = "accepted";
 
-    // Save updates to localStorage
-    localStorage.setItem("rides", JSON.stringify(rides));
-    localStorage.setItem("bookings", JSON.stringify(bookings));
+  // Save updates to localStorage
+  localStorage.setItem("rides", JSON.stringify(rides));
+  localStorage.setItem("bookings", JSON.stringify(bookings));
 
-    // Refresh the displayed bookings
-    loadDriverBookings();
-  } else {
-    alert("Not enough seats available.");
-  }
+  // Refresh the displayed bookings
+  loadDriverBookings();
 }
 
 // Function to reject a booking
