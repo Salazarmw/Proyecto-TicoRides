@@ -14,6 +14,10 @@
       href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap"
       rel="stylesheet"
     />
+    <script src="../Resources/Scripts/redirectFunctions.js"></script>
+    <script>
+      checkUserTypeAndRedirect();
+    </script>
   </head>
 
   <body>
@@ -43,7 +47,7 @@
               <a class="nav-link" href="../Home/home.html">Home</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="../Rides/myRides.html">Rides</a>
+              <a class="nav-link" href="../Rides/myRides.html">Rides</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="../Booking/booking.html">Bookings</a>
@@ -101,7 +105,9 @@
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody id="my-rides-table"></tbody>
+        <tbody id="my-rides-table">
+          <!-- Dynamic rows will be added here -->
+        </tbody>
       </table>
     </main>
 
@@ -119,7 +125,6 @@
       <p>&copy; Aventones.com</p>
     </footer>
     <script src="../Resources/Scripts/database.js"></script>
-    <script src="../Resources/Scripts/redirectFunctions.js"></script>
     <script src="../Resources/Scripts/script.js"></script>
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

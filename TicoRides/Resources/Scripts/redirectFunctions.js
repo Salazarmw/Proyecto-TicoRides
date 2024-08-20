@@ -11,7 +11,7 @@ function checkUserTypeAndRedirect() {
   }
 
   // Check if the user is a driver
-  if (loggedInUser.type !== "driver") {
+  if (loggedInUser.type !== "Driver") {
     // If the user is not a driver, redirect to the home page
     window.location.href = "../Home/home.html";
   }
@@ -34,14 +34,3 @@ function redirectToCorrectEditingForm() {
     window.location.href = "./editDriverProfile.html";
   }
 }
-
-// Initialize the page
-window.onload = function () {
-  if (document.getElementById("edit-profile")) {
-    redirectToCorrectEditingForm();
-  }
-
-  if (document.getElementById("my-rides-table")) {
-    checkUserTypeAndRedirect();
-  }
-};
