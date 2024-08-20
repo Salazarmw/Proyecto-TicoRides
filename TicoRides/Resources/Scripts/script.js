@@ -122,6 +122,132 @@ function authenticateUser(event) {
   }
 }
 
+function loadUserData() {
+  const user = getFromLocalStorage("loggedInUser");
+
+  if (!user) {
+    alert("User not found!");
+    return;
+  }
+
+  // Assign values ​​to the form fields
+  document.getElementById("firstName").value = user.firstName;
+  document.getElementById("lastName").value = user.lastName;
+  document.getElementById("idNumber").value = user.idNumber;
+  document.getElementById("birthDate").value = user.birthDate;
+  document.getElementById("email").value = user.email;
+  document.getElementById("password").value = user.password;
+  document.getElementById("repeatPassword").value = user.password;
+  document.getElementById("address").value = user.address;
+  document.getElementById("country").value = user.country;
+  document.getElementById("state").value = user.state;
+  document.getElementById("city").value = user.city;
+  document.getElementById("phone").value = user.phone;
+
+  // For driver form only
+  if (user.type === "Driver") {
+    document.getElementById("add-car-brand").value = user.vehicleBrand;
+    document.getElementById("vehicleModel").value = user.vehicleModel;
+    document.getElementById("vehicleYear").value = user.vehicleYear;
+    document.getElementById("licensePlate").value = user.licensePlate;
+  }
+}
+
+function updateUser() {
+  // Get form values
+  const firstName = document.getElementById("firstName").value.trim();
+  const lastName = document.getElementById("lastName").value.trim();
+  const idNumber = document.getElementById("idNumber").value.trim();
+  const birthDate = document.getElementById("birthDate").value;
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  const repeatPassword = document.getElementById("repeatPassword").value;
+  const address = document.getElementById("address").value;
+  const country = document.getElementById("country").value;
+  const state = document.getElementById("state").value;
+  const city = document.getElementById("city").value;
+  const phone = document.getElementById("phone").value;
+  let type = "User"; // Default type
+
+  // Email validation regex
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // Validate required fields
+  if (
+    !firstName ||
+    !lastName ||
+    !idNumber ||
+    !birthDate ||
+    !email ||
+    !password ||
+    !repeatPassword ||
+    !address ||
+    !country ||
+    !state ||
+    !city ||
+    !phone
+  ) {
+    alert("All fields are required!");
+    return;
+  }
+
+  // Validate email format
+  if (!emailPattern.test(email)) {
+    alert("Invalid email format!");
+    return;
+  }
+
+  // Validate passwords match
+  if (password !== repeatPassword) {
+    alert("Passwords do not match!");
+    return;
+  }
+
+  // Check if this is a driver registration
+  const vehicleBrand = document.getElementById("add-car-brand")?.value.trim();
+  const vehicleModel = document.getElementById("vehicleModel")?.value.trim();
+  const vehicleYear = document.getElementById("vehicleYear")?.value;
+  const licensePlate = document.getElementById("licensePlate")?.value.trim();
+
+  if (vehicleBrand || vehicleModel || vehicleYear || licensePlate) {
+    type = "Driver";
+  }
+
+  // Get existing users from local storage
+  let users = getFromLocalStorage("users");
+
+  // Update the user object
+  const updatedUser = {
+    firstName,
+    lastName,
+    idNumber,
+    birthDate,
+    email,
+    password,
+    address,
+    country,
+    state,
+    city,
+    phone,
+    type,
+    vehicleBrand: vehicleBrand || null,
+    vehicleModel: vehicleModel || null,
+    vehicleYear: vehicleYear || null,
+    licensePlate: licensePlate || null,
+  };
+
+  users = users.map((user) =>
+    user.idNumber === updatedUser.idNumber ? updatedUser : user
+  );
+
+  // Save updated users to local storage
+  localStorage.setItem("users", JSON.stringify(users));
+  localStorage.setItem("loggedInUser", JSON.stringify(updatedUser));
+
+  window.location.href = "../Home/home.html";
+  alert("User updated successfully!");
+}
+
 function loginButtonHandler(element) {
   authenticateUser();
 }
@@ -187,8 +313,8 @@ function saveRide() {
   }
 
   if (saveToLocalStorage("rides", newRide)) {
-    alert("Ride added successfully!");
     window.location.href = "../Rides/myRides.html";
+    alert("Ride added successfully!");
   } else {
     alert("Error adding ride");
     // Reset the form fields after submission
@@ -227,8 +353,8 @@ function updateRide(event) {
 
   localStorage.setItem("rides", JSON.stringify(rides));
 
-  alert("Ride updated successfully!");
   window.location.href = "../Rides/myRides.html";
+  alert("Ride updated successfully!");
 }
 
 // Function to set current time in the time input
@@ -711,7 +837,9 @@ function loadDriverBookings() {
   const pendingBookings = bookings.filter((booking) => {
     const ride = rides.find((r) => r.id == booking.rideId);
     return (
-      booking.status == "pending" && ride && ride.createdBy == currentUser.idNumber
+      booking.status == "pending" &&
+      ride &&
+      ride.createdBy == currentUser.idNumber
     );
   });
 
@@ -720,7 +848,7 @@ function loadDriverBookings() {
 
   pendingBookings.forEach((booking) => {
     const ride = rides.find((r) => r.id == booking.rideId);
-    const bookingUser = getUserById(booking.userId)
+    const bookingUser = getUserById(booking.userId);
 
     const row = document.createElement("tr");
 
@@ -752,37 +880,44 @@ function loadUserBookings() {
   const rides = getFromLocalStorage("rides");
 
   // Filter bookings linked to the logged-in user
-  const userBookings = bookings.filter(booking => booking.userId == currentUser.idNumber);
+  const userBookings = bookings.filter(
+    (booking) => booking.userId == currentUser.idNumber
+  );
 
   const tableBody = document.getElementById("bookings-table");
   tableBody.innerHTML = "";
 
-  userBookings.forEach(booking => {
-      const ride = rides.find(r => r.id == booking.rideId);
-      const driver = getUserById(ride.createdBy);
+  userBookings.forEach((booking) => {
+    const ride = rides.find((r) => r.id == booking.rideId);
+    const driver = getUserById(ride.createdBy);
 
-      const row = document.createElement("tr");
+    const row = document.createElement("tr");
 
-      // Driver cell
-      const driverCell = document.createElement("td");
-      driverCell.className = "flex-cell";
-      driverCell.innerHTML = `<img src="../Resources/Images/userIcon.png" alt="Driver" /> ${driver.firstName}`;
-      row.appendChild(driverCell);
+    // Driver cell
+    const driverCell = document.createElement("td");
+    driverCell.className = "flex-cell";
+    driverCell.innerHTML = `<img src="../Resources/Images/userIcon.png" alt="Driver" /> ${driver.firstName}`;
+    row.appendChild(driverCell);
 
-      // Ride route cell
-      const rideCell = document.createElement("td");
-      rideCell.className = "flex-cell";
-      rideCell.textContent = `${ride.departureLocation} - ${ride.arrivalLocation}`;
-      row.appendChild(rideCell);
+    // Ride route cell
+    const rideCell = document.createElement("td");
+    rideCell.className = "flex-cell";
+    rideCell.textContent = `${ride.departureLocation} - ${ride.arrivalLocation}`;
+    row.appendChild(rideCell);
 
-      // Status cell
-      const statusCell = document.createElement("td");
-      statusCell.className = "flex-cell";
-      statusCell.textContent = booking.status;
-      row.appendChild(statusCell);
+    // Status cell
+    const statusCell = document.createElement("td");
+    statusCell.className = "flex-cell";
+    statusCell.textContent = booking.status;
+    row.appendChild(statusCell);
 
-      tableBody.appendChild(row);
+    tableBody.appendChild(row);
   });
+}
+
+// Function to remove the logged-in user from local storage
+function logoutUser() {
+  localStorage.removeItem("loggedInUser");
 }
 
 function bindEvents() {
@@ -833,6 +968,14 @@ function bindEvents() {
       .getElementById("request-ride")
       .addEventListener("click", requestRide);
   }
+  if (document.getElementById("logout-btn")) {
+    document.getElementById("logout-btn").addEventListener("click", logoutUser);
+  }
+  if (document.getElementById("update-user")) {
+    document
+      .getElementById("update-user")
+      .addEventListener("click", updateUser);
+  }
 }
 
 // Initialize the page
@@ -860,6 +1003,10 @@ window.onload = function () {
 
   if (document.getElementById("bookings-table")) {
     loadUserBookings();
+  }
+
+  if (document.getElementById("update-user")) {
+    loadUserData();
   }
 };
 

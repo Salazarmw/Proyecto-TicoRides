@@ -32,8 +32,6 @@ function redirectToCorrectEditingForm() {
   if (loggedInUser.type === "Driver") {
     // If the user is not a driver, redirect to the home page
     window.location.href = "./editDriverProfile.html";
-  }else {
-    window.location.href = "./editProfile.html";
   }
 }
 
@@ -52,8 +50,6 @@ function redirectToCorrectBookingPage() {
   if (loggedInUser.type === "Driver") {
     // If the user is not a driver, redirect to the home page
     window.location.href = "./driverBooking.html";
-  }else {
-    window.location.href = "./booking.html";
   }
 }
 

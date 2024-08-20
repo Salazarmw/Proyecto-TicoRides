@@ -98,4 +98,9 @@
     footer {
         margin-top: 20px;
     }
+
+    .my-rides-button {
+        width: 90px;
+        height: 25px;
+    }
 }
