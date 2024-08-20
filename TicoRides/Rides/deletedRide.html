@@ -7,7 +7,12 @@
     <link rel="stylesheet" href="../styles.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap"
-      rel="stylesheet" />
+      rel="stylesheet"
+    />
+    <script src="../Resources/Scripts/redirectFunctions.js"></script>
+    <script>
+      redirectIfNotLoggedIn();
+    </script>
   </head>
   <body>
     <!-- Logo section -->
@@ -32,7 +37,7 @@
               <img src="../Resources/Images/userIcon.png" alt="User Menu" />
             </button>
             <div class="dropdown-content">
-              <a href="../index.html">Logout</a>
+              <a href="../index.html" id="logout-btn">Logout</a>
               <a href="../Home/editProfile.html">Settings</a>
             </div>
           </div>
@@ -47,7 +52,8 @@
       <div class="rides-button-container">
         <button
           class="my-rides-button"
-          onclick="window.location.href='../Rides/addRide.html'">
+          onclick="window.location.href='../Rides/addRide.html'"
+        >
           New Ride
         </button>
       </div>

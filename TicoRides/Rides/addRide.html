@@ -18,6 +18,10 @@
       href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap"
       rel="stylesheet"
     />
+    <script src="../Resources/Scripts/redirectFunctions.js"></script>
+    <script>
+      redirectIfNotLoggedIn();
+    </script>
   </head>
 
   <body>
@@ -72,7 +76,7 @@
                   <img src="../Resources/Images/userIcon.png" alt="User Menu" />
                 </button>
                 <div class="dropdown-content">
-                  <a href="../index.html">Logout</a>
+                  <a href="../index.html" id="logout-btn">Logout</a>
                   <a href="../Home/editProfile.html">Settings</a>
                 </div>
               </div>

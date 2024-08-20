@@ -649,10 +649,140 @@ function requestRide(userId) {
     saveToLocalStorage("bookings", booking);
     alert("Ride request submitted successfully.");
     window.location.href = "../Home/home.html";
-  }else {
+  } else {
     alert("Please login to request a ride.");
-    window.location.href = "../Home/home.html"
+    window.location.href = "../Home/home.html";
   }
+}
+
+// Function to accept a booking
+function acceptBooking(bookingId) {
+  const bookings = getFromLocalStorage("bookings");
+  const rides = getFromLocalStorage("rides");
+
+  const booking = bookings.find((b) => b.id == bookingId);
+  if (!booking) return;
+
+  const ride = rides.find((r) => r.id == booking.rideId);
+  if (!ride) return;
+
+  // Check if there are enough seats available
+  if (ride.availableSeats >= booking.requestedSeats) {
+    // Update available seats
+    ride.availableSeats -= booking.requestedSeats;
+
+    // Update booking status to accepted
+    booking.status = "accepted";
+
+    // Save updates to localStorage
+    localStorage.setItem("rides", JSON.stringify(rides));
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+
+    // Refresh the displayed bookings
+    loadDriverBookings();
+  } else {
+    alert("Not enough seats available.");
+  }
+}
+
+// Function to reject a booking
+function rejectBooking(bookingId) {
+  const bookings = getFromLocalStorage("bookings");
+
+  const booking = bookings.find((b) => b.id === bookingId);
+  if (!booking) return;
+
+  // Update booking status to rejected
+  booking.status = "rejected";
+
+  // Save updates to localStorage
+  localStorage.setItem("bookings", JSON.stringify(bookings));
+
+  // Refresh the displayed bookings
+  loadDriverBookings();
+}
+
+// Function to display pending bookings for the logged-in driver
+function loadDriverBookings() {
+  const currentUser = getFromLocalStorage("loggedInUser");
+  const bookings = getFromLocalStorage("bookings");
+  const rides = getFromLocalStorage("rides");
+
+  const pendingBookings = bookings.filter((booking) => {
+    const ride = rides.find((r) => r.id == booking.rideId);
+    return (
+      booking.status == "pending" && ride && ride.createdBy == currentUser.idNumber
+    );
+  });
+
+  const tableBody = document.getElementById("dirver-bookings-table");
+  tableBody.innerHTML = "";
+
+  pendingBookings.forEach((booking) => {
+    const ride = rides.find((r) => r.id == booking.rideId);
+    const bookingUser = getUserById(booking.userId)
+
+    const row = document.createElement("tr");
+
+    const userCell = document.createElement("td");
+    userCell.className = "flex-cell";
+    userCell.innerHTML = `<img src="../Resources/Images/userIcon.png" alt="User" /> ${bookingUser.firstName}`;
+    row.appendChild(userCell);
+
+    const rideCell = document.createElement("td");
+    rideCell.className = "flex-cell";
+    rideCell.textContent = `${ride.departureLocation} - ${ride.arrivalLocation}`;
+    row.appendChild(rideCell);
+
+    const actionCell = document.createElement("td");
+    actionCell.className = "flex-cell";
+    actionCell.innerHTML = `<a href="#" onclick="acceptBooking('${booking.id}')">Accept</a>
+                              <span>|</span>
+                              <a href="#" onclick="rejectBooking('${booking.id}')">Reject</a>`;
+    row.appendChild(actionCell);
+
+    tableBody.appendChild(row);
+  });
+}
+
+// Function to display bookings for the logged-in user
+function loadUserBookings() {
+  const currentUser = getFromLocalStorage("loggedInUser");
+  const bookings = getFromLocalStorage("bookings");
+  const rides = getFromLocalStorage("rides");
+
+  // Filter bookings linked to the logged-in user
+  const userBookings = bookings.filter(booking => booking.userId == currentUser.idNumber);
+
+  const tableBody = document.getElementById("bookings-table");
+  tableBody.innerHTML = "";
+
+  userBookings.forEach(booking => {
+      const ride = rides.find(r => r.id == booking.rideId);
+      const driver = getUserById(ride.createdBy);
+
+      const row = document.createElement("tr");
+
+      // Driver cell
+      const driverCell = document.createElement("td");
+      driverCell.className = "flex-cell";
+      driverCell.innerHTML = `<img src="../Resources/Images/userIcon.png" alt="Driver" /> ${driver.firstName}`;
+      row.appendChild(driverCell);
+
+      // Ride route cell
+      const rideCell = document.createElement("td");
+      rideCell.className = "flex-cell";
+      rideCell.textContent = `${ride.departureLocation} - ${ride.arrivalLocation}`;
+      row.appendChild(rideCell);
+
+      // Status cell
+      const statusCell = document.createElement("td");
+      statusCell.className = "flex-cell";
+      statusCell.textContent = booking.status;
+      row.appendChild(statusCell);
+
+      tableBody.appendChild(row);
+  });
 }
 
 function bindEvents() {
@@ -722,6 +852,14 @@ window.onload = function () {
 
   if (document.getElementById("request-ride")) {
     loadRideDetails();
+  }
+
+  if (document.getElementById("dirver-bookings-table")) {
+    loadDriverBookings();
+  }
+
+  if (document.getElementById("bookings-table")) {
+    loadUserBookings();
   }
 };
 
