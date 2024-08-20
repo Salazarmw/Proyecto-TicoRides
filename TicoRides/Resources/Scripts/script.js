@@ -164,7 +164,7 @@ function saveRide() {
   }
 
   // Retrieve the current user ID from localStorage
-  const currentUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  const currentUser = getFromLocalStorage("loggedInUser");
   let newRide;
 
   // Create a new ride object
@@ -251,9 +251,9 @@ function getParameterByName(name) {
 // Function to load rides into the table
 function loadRides() {
   const table = document.getElementById("my-rides-table");
-  const rides = JSON.parse(localStorage.getItem("rides"));
+  const rides = getFromLocalStorage("rides");
   // Retrieve the logged-in user from localStorage
-  const currentUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  const currentUser = getFromLocalStorage("loggedInUser");
 
   // Clear the table
   table.innerHTML = "";
@@ -281,7 +281,7 @@ function loadRides() {
 
 // Function to delete a ride
 function deleteRide(id) {
-  let rides = JSON.parse(localStorage.getItem("rides")) || [];
+  let rides = getFromLocalStorage("rides");
   rides = rides.filter((ride) => ride.id !== id);
   localStorage.setItem("rides", JSON.stringify(rides));
   loadRides();
@@ -290,7 +290,7 @@ function deleteRide(id) {
 // Function to load car data of the logged driver
 function loadCarData() {
   // Retrieve the current user logged from localStorage
-  const currentUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  const currentUser = getFromLocalStorage("loggedInUser");
 
   // Ensure the user data exists before trying to access its properties
   if (currentUser) {
@@ -313,7 +313,7 @@ function loadCarData() {
 
 function loadRideData() {
   const rideId = getParameterByName("id");
-  const rides = JSON.parse(localStorage.getItem("rides"));
+  const rides = getFromLocalStorage("rides");
 
   const ride = rides.find((ride) => ride.id === parseInt(rideId));
 
@@ -335,7 +335,7 @@ function loadRideData() {
 }
 
 function getUserById(userId) {
-  const users = JSON.parse(localStorage.getItem("users"));
+  const users = getFromLocalStorage("users");
   return users.find((user) => user.idNumber === userId);
 }
 
@@ -352,7 +352,7 @@ function createRideRow(driver, from, to, seats, car, fee, link) {
       <td>${to}</td>
       <td>${seats}</td>
       <td>${car}</td>
-      <td>${fee ? `$${fee}` : '--'}</td>
+      <td>${fee ? `$${fee}` : "--"}</td>
       <td><a href="${link}">Request</a></td>
     </tr>
   `;
@@ -557,14 +557,13 @@ function loadRideCards() {
 
 function loadRideDetails() {
   // Get the ride ID from the URL
-  const urlParams = new URLSearchParams(window.location.search);
-  const rideId = urlParams.get("id");
+  const rideId = getParameterByName("id");
 
   // Get the rides from localStorage
-  const rides = JSON.parse(localStorage.getItem("rides"));
+  const rides = getFromLocalStorage("rides");
 
   // Find the ride with the corresponding ID
-  const ride = rides.find(ride => ride.id == rideId);
+  const ride = rides.find((ride) => ride.id == rideId);
 
   if (ride) {
     // Get the user who created the ride
@@ -572,14 +571,18 @@ function loadRideDetails() {
 
     // Load ride information into the form
     document.querySelector("#see-ride-driver").textContent = user.firstName;
-    document.querySelector("#ride-route h1").textContent = `${ride.departureLocation} - ${ride.arrivalLocation}`;
+    document.querySelector(
+      "#ride-route h1"
+    ).textContent = `${ride.departureLocation} - ${ride.arrivalLocation}`;
 
     // Fill in the ride details
-    document.querySelector(".route-container p:nth-child(1) span").textContent = ride.departureLocation;
-    document.querySelector(".route-container p:nth-child(2) span").textContent = ride.arrivalLocation;
-    document.querySelector("#timeSee").value = ride.departureTime;
-    document.querySelector("#seatsSee").value = ride.seatsAvailable;
-    document.querySelector("#feeSee").value = ride.fee || '';
+    document.querySelector(".route-container p:nth-child(1) span").textContent =
+      ride.departureLocation;
+    document.querySelector(".route-container p:nth-child(2) span").textContent =
+      ride.arrivalLocation;
+    document.getElementById("timeSee").value = ride.departureTime;
+    document.getElementById("seatsSee").value = ride.seatsAvailable;
+    document.getElementById("feeSee").value = ride.fee;
 
     // Fill in the vehicle details
     if (document.getElementById("make")) {
@@ -594,8 +597,8 @@ function loadRideDetails() {
 
     // Mark the selected days
     const days = document.querySelectorAll(".days-select input[name='days']");
-    days.forEach(dayCheckbox => {
-      dayCheckbox.checked = ride.days.includes(dayCheckbox.value);
+    days.forEach((dayCheckbox) => {
+      dayCheckbox.checked = ride.selectedDays.includes(dayCheckbox.value);
     });
   } else {
     console.error("Ride not found");
@@ -604,7 +607,52 @@ function loadRideDetails() {
 
 // Function to generate a unique ID
 function generateUniqueId() {
-  return '_' + Math.random().toString(36).substr(2, 9);
+  return "_" + Math.random().toString(36).substr(2, 9);
+}
+
+// Function to handle ride booking request
+function requestRide(userId) {
+  // Get the ride ID from the URL
+  const rideId = getParameterByName("id");
+
+  // Retrieve the rides data from localStorage
+  const rides = getFromLocalStorage("rides");
+
+  // Find the ride by its ID
+  const ride = rides.find((ride) => ride.id == rideId);
+
+  // Retrieve the current user ID from localStorage
+  const currentUser = getFromLocalStorage("loggedInUser");
+
+  if (!ride) {
+    return "Ride not found.";
+  }
+
+  const requestedSeats = document.getElementById("seatsSee").value;
+
+  // Check if the requested seats are available
+  if (requestedSeats > ride.seats) {
+    return "Not enough seats available.";
+  }
+
+  // Create a booking object
+  if (currentUser) {
+    const booking = {
+      id: generateUniqueId(), // Generates a unique ID for the request
+      rideId: rideId,
+      userId: currentUser.idNumber,
+      requestedSeats: requestedSeats,
+      status: "pending", // Initial status is 'pending'
+    };
+
+    // Store updated bookings back to localStorage
+    saveToLocalStorage("bookings", booking);
+    alert("Ride request submitted successfully.");
+    window.location.href = "../Home/home.html";
+  }else {
+    alert("Please login to request a ride.");
+    window.location.href = "../Home/home.html"
+  }
 }
 
 function bindEvents() {
@@ -649,6 +697,11 @@ function bindEvents() {
     document
       .getElementById("find-rides-mobile")
       .addEventListener("click", loadRideTable);
+  }
+  if (document.getElementById("request-ride")) {
+    document
+      .getElementById("request-ride")
+      .addEventListener("click", requestRide);
   }
 }
 

@@ -6,18 +6,15 @@
     <title>Aventones - See Ride</title>
     <link
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+      rel="stylesheet" />
     <link rel="stylesheet" href="../Resources/Styles/styles.css" />
     <link rel="stylesheet" href="../Resources/Styles/mobileDesign.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap"
-      rel="stylesheet"
-    />
+      rel="stylesheet" />
     <link
       href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap"
-      rel="stylesheet"
-    />
+      rel="stylesheet" />
   </head>
 
   <body>
@@ -36,8 +33,7 @@
           data-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+          aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -59,12 +55,10 @@
                 class="form-control mr-sm-2"
                 type="search"
                 placeholder="Search"
-                aria-label="Search"
-              />
+                aria-label="Search" />
               <button
                 class="btn btn-outline-success my-2 my-sm-0"
-                type="submit"
-              >
+                type="submit">
                 Search
               </button>
               <div class="user-menu">
@@ -104,30 +98,21 @@
         <div class="ride-data-container">
           <label>Days</label>
           <div class="days-select">
-            <label
-              ><input
+            <label><input
                 type="checkbox"
                 name="days"
                 value="Mon"
-                checked
-              />Mon</label
-            >
-            <label
-              ><input
+                checked />Mon</label>
+            <label><input
                 type="checkbox"
                 name="days"
                 value="Tue"
-                checked
-              />Tue</label
-            >
-            <label
-              ><input
+                checked />Tue</label>
+            <label><input
                 type="checkbox"
                 name="days"
                 value="Wed"
-                checked
-              />Wed</label
-            >
+                checked />Wed</label>
             <label><input type="checkbox" name="days" value="Thu" />Thu</label>
             <label><input type="checkbox" name="days" value="Fri" />Fri</label>
             <label><input type="checkbox" name="days" value="Sat" />Sat</label>
@@ -135,92 +120,77 @@
           </div>
 
           <!-- Inputs for time, seats, fee -->
-          <div class="input-group">
-            <label for="timeSee">Time</label>
-            <input type="time" id="timeSee" name="time" disabled />
-
-            <label for="seatsSee">Seats</label>
-            <input
-              type="number"
-              id="seatsSee"
-              value="2"
-              min="1"
-              max="4"
-              step="1"
-              required
-            />
-
-            <label for="feeSee">Fee</label>
-            <input
-              type="number"
-              id="feeSee"
-              value="15"
-              min="1"
-              max="30"
-              step="1"
-              disabled
-            />
-          </div>
-        </div>
-
-        <!-- Vehicle details -->
-        <fieldset>
-          <legend>Vehicle Details</legend>
-          <div class="input-group">
-            <div>
-              <label for="make">Make</label>
-              <input type="text" id="make" name="make" value="" disabled />
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="timeSee">Time</label>
+              <input type="time" id="timeSee" name="time" class="form-control"
+                disabled />
             </div>
-
-            <div>
-              <label for="model">Model</label>
-              <input type="text" id="model" name="model" value="" disabled />
+            <div class="form-group col-md-4">
+              <label for="seatsSee">Seats</label>
+              <input type="number" id="seatsSee" class="form-control" value="2"
+                min="1" max="4" step="1" required />
             </div>
-
-            <div>
-              <label for="year">Year</label>
-              <input
-                type="number"
-                id="year"
-                value=""
-                min="1999"
-                max="2025"
-                step="1"
-                disabled
-              />
+            <div class="form-group col-md-4">
+              <label for="feeSee">Fee</label>
+              <input type="number" id="feeSee" class="form-control" value="15"
+                min="1" max="30" step="1" disabled />
             </div>
           </div>
-        </fieldset>
 
-        <!-- Buttons: Cancel and Request -->
-        <div class="button-group">
-          <div class="button-container">
-            <a href="../Home/home.html">Cancel</a>
-          </div>
-          <div class="button-container">
-            <button class="save-button" id="request-ride">Request</button>
-          </div>
-        </div>
-      </form>
-    </main>
+          <!-- Vehicle details -->
+          <fieldset>
+            <legend>Vehicle Details</legend>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="make">Make</label>
+                <input type="text" id="make" name="make" class="form-control"
+                  value disabled />
+              </div>
+              <div class="form-group col-md-4">
+                <label for="model">Model</label>
+                <input type="text" id="model" name="model" class="form-control"
+                  value disabled />
+              </div>
+              <div class="form-group col-md-4">
+                <label for="year">Year</label>
+                <input type="number" id="year" class="form-control" value
+                  min="1999" max="2025" step="1" disabled />
+              </div>
+            </div>
+          </fieldset>
 
-    <!-- Footer -->
-    <footer>
-      <nav>
-        <a href="../Home/home.html">Home |</a>
-        <a href="../Rides/myRides.html">Rides |</a>
-        <a href="../Booking/booking.html">Bookings |</a>
-        <a href="../Home/editProfile.html">Settings |</a>
-        <a href="../index.html">Login |</a>
-        <a href="../Register/register.html">Register</a>
-      </nav>
-      <p>&copy; Aventones.com</p>
-    </footer>
-    <script src="../Resources/Scripts/database.js"></script>
-    <script src="../Resources/Scripts/script.js"></script>
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  </body>
-</html>
+          <!-- Buttons: Cancel and Request -->
+          <div class="button-group">
+            <div class="button-container">
+              <a href="../Home/home.html">Cancel</a>
+            </div>
+            <div class="button-container">
+              <button class="save-button" id="request-ride">Request</button>
+            </div>
+          </div>
+        </form>
+      </main>
+
+      <!-- Footer -->
+      <footer>
+        <nav>
+          <a href="../Home/home.html">Home |</a>
+          <a href="../Rides/myRides.html">Rides |</a>
+          <a href="../Booking/booking.html">Bookings |</a>
+          <a href="../Home/editProfile.html">Settings |</a>
+          <a href="../index.html">Login |</a>
+          <a href="../Register/register.html">Register</a>
+        </nav>
+        <p>&copy; Aventones.com</p>
+      </footer>
+      <script src="../Resources/Scripts/database.js"></script>
+      <script src="../Resources/Scripts/script.js"></script>
+      <!-- Bootstrap JS and dependencies -->
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+      <script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+  </html>
